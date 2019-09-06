@@ -10,4 +10,4 @@
 * Cross browser support
 
 
-![](resources/ci_calc.gif)
+![](resources/calc_ci.gif)
