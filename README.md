@@ -1,4 +1,4 @@
-# Compound Interest Calculator JavaScript
+Compound Interest Calculator JavaScript
 
 ## Scaffolding
 
@@ -11,3 +11,9 @@
 
 
 ![](resources/calc_ci.gif)
+
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
