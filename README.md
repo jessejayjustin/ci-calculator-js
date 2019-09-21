@@ -1,19 +1,4 @@
-Compound Interest Calculator JavaScript
+## Compound Interest Calculator JS
 
-## Scaffolding
-
-* Calculate if principal amount selected
-* Calculate if rate of interest selected
-* Calculate if interest compounded is half-yearly 
-* Calculate if interest compounded is quarterly 
-* BDD Test
-* Cross browser support
-
-
-![](resources/calc_ci.gif)
-
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
+Project demo can be found here: https://codepen.io/jessejayjustin/project/editor/ZLxgQW
 
