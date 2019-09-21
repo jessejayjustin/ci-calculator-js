@@ -1,27 +1,67 @@
-.mt {
-	margin-top: 25px;
+html,body,span,applet,object,iframe,h1,h2,
+h3,h4,h5,h6,p,blockquote,a,abbr,acronym,address,
+big,cite,del,dfn,em,img,ins,kbd,q,s,samp,small,
+strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,
+dd,ol,ul,li,fieldset,form,label,legend,table,caption,
+tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,
+embed,figure,figcaption,footer,header,hgroup,input,menu,
+nav,output,ruby,section,summary,time,mark,audio,video {
+border: 0;
+margin: 0;
+padding: 0;
+vertical-align: baseline;
 }
 
-.fr {
+body {
+    background-color: #999;
+}
+
+input {
+    font-weight: 600;
+}
+
+header {
+    margin-top: 11rem;
+}
+
+p {
+	font-size: 17px;
+    color: #666;
+}
+
+.mT {
+	margin-top: 17px;
+}
+
+.fR {
 	float: right;
 }
 
-.fl {
+.fL {
 	float: left;
 }
 
-.title {
-	margin-top: 12px;
+.container {
+    float: none;
+    margin-top: 0px;
+    margin-bottom: 26px;
+    width: 700px;
+    padding: 7px;
+    height: 0 auto;
+    background-color: #EDE8D3;
+    border: 4px solid #EEDFCC;
+    border-radius: 9px; 
+    margin-top: 6px; 
 }
 
-#totalAmount {
+#title {
+	margin-top: 5px;
+    font-weight: bold;
+}
+
+#totalAmt {
 	border-width: 1px;
 	border-color: #FF6347;
-	cursor: pointer;
-}
-
-.rate {
-	font-size: 16px;
 }
 
 #enterAllFields {
@@ -34,30 +74,196 @@
 
 .errorMsgs {
 	margin-left: 17px;
+    margin-top: 6px;
+    font-size: 13px;
 }
 
 #rate {
 	margin-left: -15px;
 }
 
-p {
-	font-size: 17px;
+.row-one {
+    margin-top: 15px;
 }
 
-input {
-	font-weight: 600;
+.select0  select {
+    font-size: 16px;
+    height: 36px;
+    background-color: #F0F0E7;
 }
 
-#title p {
-	font-size: 15px;
-	width: 100%;
+.select1 select {
+    font-size: 16px;
+    background-color: #F0F0E7;
 }
 
-#title h3 {
-	font-size: 20px;
-	font-weight: bold;
-	margin-bottom: 5px;
+.form-control {
+    height: 33px;
+    background-color: #F0F0E7;
 }
+
+#calc {
+    border-radius: 9px;
+    color: white;
+    padding: 2px;
+    font-size: 27px;
+    font-weight: bold;
+    margin-left: 1px;
+    width: 51rem;
+}
+
+#reset {
+    background-color: #696969;
+    border-radius: 9px;
+    color: white;
+    padding: 5px;
+    font-size: 19px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#reset:hover {
+    background: #555;
+    color: #fff;
+}
+
+#reset:active {
+    background: #333;
+}
+
+.footer {
+    background-color: #E6D5BF;
+    height: 180px;
+    margin-top: 1rem;
+    margin-bottom: 1px;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+         
+.fRow {
+  margin-top: 6px;
+  margin-left: 5px;
+}
+
+#sum {
+    margin-left: 1px;
+    width: 63rem;
+}
+
+#years {
+    width: 63rem;
+}
+
+#rate {
+    width: 60rem;
+    margin-left: 1px;
+}
+
+.header > h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header > p {
+  font-size: 15px;
+  color: #000;
+  margin-top: 5px;
+}
+
+.main-container {
+    z-index: 99;
+    width: 760px;
+    height: 100%;
+    margin-top: 8rem;
+    background-color: #FFF;
+    border-radius: 11px;
+}
+
+#totalAmt {
+    width: 60rem;
+}
+
+#compoundInt {
+    width: 60rem;
+}
+
+.rateErr {
+    display: block;
+}
+
+/* On smaller screens, decrease element width */
+@media only screen and (max-width: 991px) {
+  .container {
+    width: auto;
+  }
+
+  .main-container {
+    width: auto;
+  }
+
+  #sum {
+    width: 95%;
+  }
+
+  #years {
+    width: 95%;
+  }
+
+  #rate {
+    width: 90%;
+  }
+
+  #totalAmt {
+    width: 100%;
+  }
+
+  #compoundInt {
+    width: 100%;
+  }
+
+  #calc {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 534px) {
+    #calc {
+      width: 350px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #calc {
+      width: 320px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #calc {
+      width: 300px;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    #calc {
+      width: 280px;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    #calc {
+      width: 250px;
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
