@@ -176,8 +176,8 @@ $("document").ready(function() {
   }
   
   isListEmpty($('input[type="text"]'));
-  validateList($('input[type="text"]#sum'));
-  validateList($('input[type="text"]#rate'));
+  validateList(p);
+  validateList(r);
 
   function defStyleSetup(el) {
     el.css({

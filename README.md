@@ -1,37 +1,6 @@
-## ES6-jQuery Webpack Boilerplate
+## Compound Interest Calculator Javascript
 
-My personal ES6-jQuery boilerplate built with Babel 6 & Webpack 4.
-
-# Prerequisites
-
-- [NodeJS](https://nodejs.org/en/)
-- [Yarn](https://yarnpkg.com)
-
-# Folder structure
-
-Below is the folder structure.
-
-```
-src
-└── css
-│    │
-│    └── all.css
-└── index.js
-public
-├── assets
-└── index.html
-```
-
-Add styles to the `css` folder or for mutiple css files use `@import` to the `styles.css` to add those files.
-
-Add images to the `assets` folder.
-
-The main JS file can be found in the `src/index.js`, libraries are also imported there.
-
-Update the `index.html` in the public directory to suite your needs.
-
-Change the `favicon.ico` with any icon.
-
+Project demo can be found here: https://codepen.io/jessejayjustin/project/editor/ZLxgQW
 
 ## Getting Started
 
