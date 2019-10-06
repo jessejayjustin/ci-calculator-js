@@ -138,7 +138,7 @@ $("document").ready(function() {
   const r = $('#rate'); // % Rate per annum
   const t = $('#years'); // Time Span in years
   const ic = $('#ic'); // Interest Compounded
-  const ci = $('#compoundInt'); // Compound Interest
+  const ci = $('#cInterest'); // Compound Interest
   const rErr = $('#rateErr');
   const tAmt = $('#totalAmt');
   const calcTyp = $('#calcTyp'); // Calculation type
@@ -179,28 +179,12 @@ $("document").ready(function() {
   validateList(p);
   validateList(r);
 
-  function defStyleSetup(el) {
+  function editStyleSetup(el,val1,val2,val3,val4) {
     el.css({
-      'border-width': '1px',
-      'border-color': '#ccc',
-      'background-color': '#F0F0E7'
-    }).prop('disabled', false);
-  }
-
-  function newStyleSetup(el) {
-    el.css({
-      'border-width': '1px',
-      'border-color': '#FF6347',
-      'background-color': '#B0C4DE'
-    }).prop('disabled', true);
-  }
-
-  function tAmtStyleSetup(el) {
-    el.css({
-      'border-width': '1px',
-      'border-color': '#FF6347',
-      'background-color': '#F0F0E7'
-    }).prop('disabled', true);
+      'border-width': val1,
+      'border-color': val2,
+      'background-color': val3,
+    }).prop('disabled', val4);
   }
 
   function styleSetup(id, obj) {
@@ -210,27 +194,27 @@ $("document").ready(function() {
       obj.forEach(function (item, index) {
         if(val === 'Compound Interest') {
           if(index === 1) {
-            return newStyleSetup(item);
+            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
           } else if(index === 2) {
-            return tAmtStyleSetup(item);
+            return editStyleSetup(item,'1px','#FF6347','#F0F0E7',true);
           } else {
-            return defStyleSetup(item);
+            return editStyleSetup(item,'1px','#ccc','#F0F0E7',false);
           }
         } else if(val === 'Principal') {
           if(index === 0) {
-            return newStyleSetup(item);
+            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
           } else if(index === 1) {
-            return newStyleSetup(item);
+            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
           } else {
-            return defStyleSetup(item);
+            return editStyleSetup(item,'1px','#ccc','#F0F0E7',false);
           }
         } else if(val === 'Rate') {
           if(index === 3) {
-            return newStyleSetup(item);
+            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
           } else if(index === 1) {
-            return newStyleSetup(item);
+            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
           } else {
-            return defStyleSetup(item);
+            return editStyleSetup(item,'1px','#ccc','#F0F0E7',false);
           }
         }
       });
@@ -239,13 +223,13 @@ $("document").ready(function() {
 
   styleSetup(calcTyp, [p,ci,tAmt,r]);
 
-  function calcIC(id) {
+  function calcIc(id) {
     id.change(function () {
       calc.calcDiff();
     });
   }
 
-  calcIC(ic);
+  calcIc(ic);
 
   function setup(id,val0,val1) {
     $(id).focus(function () {
@@ -267,28 +251,104 @@ $("document").ready(function() {
     });
   }
 
-  calcOnClick($('#calc'));
+  calcOnClick($('#calc-btn'));
 
   function resetOnClick(id, el, ct) {
     id.click(function () {
       el.forEach(function (item, index) {
         item.val('');
         if(index === 3) {
-          return newStyleSetup(item);
+          return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
         } else if(index === 0) {
           return setup(item, '#E0FFFF','#F0F0E7');
-        } 
+        } else if(index === 1) {
+          return setup(item, '#E0FFFF','#F0F0E7');
+        }
       });
 
       if(ct.val() === 'Compound Interest') {
-        return tAmtStyleSetup(el[4]);
+        return editStyleSetup(el[4],'1px','#FF6347','#F0F0E7',true);
       } else {
-        return defStyleSetup(el[4]);
+        return editStyleSetup(el[4],'1px','#ccc','#F0F0E7',false);
       }
+
     });
   }
 
-  resetOnClick($('#reset'), [p,r,t,ci,tAmt], calcTyp);
+  resetOnClick($('#rst-btn'), [p,r,t,ci,tAmt], calcTyp);
+
+  $('.fa-bars').click(function () {
+
+    let currentClass = $('.sub-nav nav');
+
+    if (currentClass.hasClass('not-active')) {
+      $(currentClass).removeClass('not-active').addClass('active');
+    } else {
+      $(currentClass).removeClass('active').addClass('not-active');
+    }
+
+  });
+
+  // Create the state-indicator element
+  var indicator = document.createElement('div');
+  indicator.className = 'state-indicator';
+  document.body.appendChild(indicator);
+
+  // Create a method which returns device state
+  function getDeviceState() {
+    var index = parseInt(window.getComputedStyle(indicator).getPropertyValue('z-index'), 10);
+
+    var states = {
+      3: 'small-desktop',
+      4: 'tablet',
+      5: 'phone'
+    };
+
+    return states[index] || 'desktop';
+  }
+  
+  var state = getDeviceState();
+  var srchInput = $('.i-group');
+  if(srchInput.hasClass('col-xs-offset-2')) {
+    $(srchInput).removeClass('col-xs-offset-2').addClass('col-xs-offset-5');
+  } else if (state === 'phone' && srchInput.hasClass('col-xs-offset-5')) {
+    $(srchInput).removeClass('col-xs-offset-5').addClass('col-xs-offset-2');
+  }
+
+  window.addEventListener('resize', function() {
+    let state = getDeviceState();
+    if(state === 'desktop') {
+      $('.navbar-top .nav-brand-wrapper').addClass('container');
+      $('.navbar-top .sub-nav-wrapper').addClass('container');
+    } else if(state === 'small-desktop') {
+      $('.navbar-top .nav-brand-wrapper').removeClass('container');
+      $('.navbar-top .sub-nav-wrapper').removeClass('container');
+    } else if (state === 'phone') {
+      $(srchInput).removeClass('col-xs-offset-5').addClass('col-xs-offset-2');
+    } else if (state === 'tablet' && srchInput.hasClass('col-xs-offset-2')) {
+      $(srchInput).removeClass('col-xs-offset-2').addClass('col-xs-offset-5');
+    }
+  });
+
+  /*
+  $(window).scroll(function() {
+    if ($(document).scrollTop() > 50) {
+      $('nav').addClass('class_nav');
+    } else {
+      $('nav').removeClass('class_nav');
+    }
+  });
+
+  function viewport() {
+    var e = window
+    , a = 'inner';
+    if ( !( 'innerWidth' in window ) ) {
+      a = 'client';
+      e = document.documentElement || document.body;
+    }
+    return { width : e[ a+'Width' ] , height : e[ a+'Height' ] }
+  }
+  */
 });
 
 
