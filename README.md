@@ -1,4 +1,4 @@
-## Compound Interest Calculator Javascript
+## Compound Interest Calculator JavaScript
 
 Project demo can be found here: https://codepen.io/jessejayjustin/project/editor/ZLxgQW
 
