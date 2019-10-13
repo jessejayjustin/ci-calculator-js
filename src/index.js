@@ -18,20 +18,20 @@ $("document").ready(function() {
     },
 
     calcDiff: function() {
-      const p = (!isNaN(this.p.val()) ? this.p.val() : null);
-      const r = (!isNaN(this.r.val()) ? this.r.val() : null);
-      const t = (!isNaN(this.t.val()) ? this.t.val() : null);
-      const tA = (!isNaN(this.tAmt.val()) ? this.tAmt.val() : null);
-      const rpa = (this.rateCheck(r, this.ci, this.tAmt, this.rErr)) ? this.rateCheck(r, this.ci, this.tAmt, this.rErr) : null;
-      const n = (this.interestCompounded(this.ic)) ? this.interestCompounded(this.ic) : null;
+      let p = (!isNaN(this.p.val()) ? this.p.val() : null);
+      let r = (!isNaN(this.r.val()) ? this.r.val() : null);
+      let t = (!isNaN(this.t.val()) ? this.t.val() : null);
+      let tA = (!isNaN(this.tAmt.val()) ? this.tAmt.val() : null);
+      let rpa = (this.rateCheck(r, this.ci, this.tAmt, this.rErr)) ? this.rateCheck(r, this.ci, this.tAmt, this.rErr) : null;
+      let n = (this.interestCompounded(this.ic)) ? this.interestCompounded(this.ic) : null;
       switch (this.calcTyp.val()) {
-        case ('Compound Interest'):
+        case ('1'):
         this.calcCI(p, rpa, t, n, this.ci, this.tAmt);
         break;
-        case ('Principal'):
+        case ('2'):
         this.calcP(this.p, rpa, t, n, this.ci, tA, this.tAmt);
         break;
-        case ('Rate'):
+        case ('3'):
         this.calcR(p, this.r, t, n, this.ci, tA, this.tAmt);
         break;
         default:
@@ -54,37 +54,35 @@ $("document").ready(function() {
 
     interestCompounded: function(ic) {
       switch (ic.val()) {
-        case ('Annually'):
+        case ('1'):
         return 1;
         break;
-        case ('Semi-Annually'):
+        case ('2'):
         return 2;
         break;
-        case ('Quarterly'):
+        case ('4'):
         return 4;
         break;
-        case ('Bi-Monthly'):
+        case ('6'):
         return 6;
         break;
-        case ('Monthly'):
+        case ('12'):
         return 12;
         break;
-        case ('Semi-Monthly'):
+        case ('24'):
         return 24;
         break;
-        case ('Bi-Weekly'):
+        case ('36'):
         return 36;
         break;
-        case ('Weekly'):
+        case ('54'):
         return 54;
         break;
-        case ('Daily'):
+        case ('360'):
         return 360;
         break;
-        case ('Daily(365)'):
+        case ('365'):
         return 365;
-        break;
-        case (''):
         default:
         return false;
         break;
@@ -93,9 +91,9 @@ $("document").ready(function() {
 
     calcCI: function(p, rpa, t, n, ci, tAmt) {
       // The equation is A = p * [[1 + (r/n)] ^ nt]
-      const A = (p * Math.pow((1 + (rpa/100/(n))), (n*t)));
-      const c = A; 
-      const e = c-p*100/100; //turned into a decimal by dividing by 100
+      let A = (p * Math.pow((1 + (rpa/100/(n))), (n*t)));
+      let c = A; 
+      let e = c-p*100/100; //turned into a decimal by dividing by 100
       if(e && c) {
        ci.val(e.toFixed(2));
        tAmt.val(c.toFixed(2));
@@ -107,8 +105,8 @@ $("document").ready(function() {
       if(!rpa && !t) {
         tAmt.val('');
       }
-      const P = (tA / Math.pow((1 + (rpa/100/(n))), (n*t)));
-      const e = tA-P*100/100; //turned into a decimal by dividing by 100
+      let P = (tA / Math.pow((1 + (rpa/100/(n))), (n*t)));
+      let e = tA-P*100/100; //turned into a decimal by dividing by 100
       if(P && e) {
        p.val(P.toFixed(2));
        ci.val(e.toFixed(2));
@@ -120,10 +118,10 @@ $("document").ready(function() {
       if(!p && !t) {
         tAmt.val('');
       }
-      const x = (Math.pow((tA/p), (1/(n*t)))-1);
-      const y = x*100;
-      const c = y.toFixed(1);
-      const e = tA-p;
+      let x = (Math.pow((tA/p), (1/(n*t)))-1);
+      let y = x*100;
+      let c = y.toFixed(1);
+      let e = tA-p;
       if(isNaN(c)) {
         r.val('');
         ci.val('');
@@ -137,32 +135,35 @@ $("document").ready(function() {
   const p = $('#sum'); // Principal or Sum of amount
   const r = $('#rate'); // % Rate per annum
   const t = $('#years'); // Time Span in years
-  const ic = $('#ic'); // Interest Compounded
-  const ci = $('#cInterest'); // Compound Interest
+  const ic = $('#intCmpnd'); // Interest Compounded
+  const ci = $('#cmpndInt'); // Compound Interest
   const rErr = $('#rateErr');
   const tAmt = $('#totalAmt');
   const calcTyp = $('#calcTyp'); // Calculation type
   const helpId = $('#enterAllFields');
+  const _input = $('input[type="text"]');
+  const selectList = $('select[class="form-control"]');
 
   calc.setCalcProperties(p, r, t, ic, ci, tAmt, rErr, calcTyp);
   calc.calcDiff();
 
-  function validateList(id) {
+  let validateList = function(id) {
     id.keyup(function (event) {
-      calc.calcDiff();
       event = (event) ? event : window.event;
-      let charCode = (event.which) ? event.which : event.keyCode;
-      let val = $(this).val();
-      if(val.split('.').length>2 && charCode === 190) {
+      var charCode = (event.which) ? event.which : event.keyCode;
+      var val = $(this).val();
+      if (!(/\d+(\.\d+)?/.test(val))){
+        $(this).val('');
+      } else if(val.split('.').length>2 && charCode === 190) {
         $(this).val('');
       } 
     });
   }
 
-  function isListEmpty(id) {
+  let isListEmpty = function(id) {
     id.keyup(function (event) {
       calc.calcDiff();
-      let val = $(this).val().replace(/[^\d.]/g,'');
+      var val = $(this).val().replace(/[^\d.]/g, '');
       $(this).val(val);
       if(val === '') {
         helpId.html('Enter all the fields');
@@ -174,131 +175,151 @@ $("document").ready(function() {
       }
     });
   }
-  
-  isListEmpty($('input[type="text"]'));
+
   validateList(p);
   validateList(r);
+  isListEmpty(_input);
 
-  function editStyleSetup(el,val1,val2,val3,val4) {
-    el.css({
-      'border-width': val1,
-      'border-color': val2,
-      'background-color': val3,
-    }).prop('disabled', val4);
+  const inputList = [p,r,t,ci,tAmt];
+ 
+  let editInputStyle = function(el) {
+    return el.css({
+      'border-width': this.bW,
+      'border-color': this.bordC,
+      'background-color': this.bckgrndC,
+    }).prop('disabled', this.dsbld);
   }
 
-  function styleSetup(id, obj) {
-    id.change(function () {
-      calc.calcDiff();
-      let val = $(this).val();
-      obj.forEach(function (item, index) {
-        if(val === 'Compound Interest') {
-          if(index === 1) {
-            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
-          } else if(index === 2) {
-            return editStyleSetup(item,'1px','#FF6347','#F0F0E7',true);
-          } else {
-            return editStyleSetup(item,'1px','#ccc','#F0F0E7',false);
-          }
-        } else if(val === 'Principal') {
-          if(index === 0) {
-            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
-          } else if(index === 1) {
-            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
-          } else {
-            return editStyleSetup(item,'1px','#ccc','#F0F0E7',false);
-          }
-        } else if(val === 'Rate') {
-          if(index === 3) {
-            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
-          } else if(index === 1) {
-            return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
-          } else {
-            return editStyleSetup(item,'1px','#ccc','#F0F0E7',false);
-          }
-        }
-      });
-    });
+  let styleObj0 = {
+    bW: '1px',
+    bordC: '#FF6347',
+    bckgrndC: '#B0C4DE',
+    dsbld: true
   }
 
-  styleSetup(calcTyp, [p,ci,tAmt,r]);
-
-  function calcIc(id) {
-    id.change(function () {
-      calc.calcDiff();
-    });
+  let styleObj1 = {
+    bW: '1px',
+    bordC: '#ccc',
+    bckgrndC: '#F0F0E7',
+    dsbld: false
   }
 
-  calcIc(ic);
-
-  function setup(id,val0,val1) {
+  let defBordC = function(id, bc0, bc1) {
     $(id).focus(function () {
-      $(this).css('background-color', val0);
+      $(id).css('border-color', bc0);
     }).blur(function () {
-      $(this).css('background-color', val1);
+      $(id).css('border-color', bc1);
     });
   }
 
-  setup(p,'#E0FFFF','#F0F0E7');
-  setup(t,'#E0FFFF','#F0F0E7');
-  setup(ci,'#E0FFFF','#F0F0E7');
-  setup(r,'#B0C4DE','#F0F0E7');
-  setup($('select[class="form-control"]'),'#FFF','#F0F0E7');
+  inputList.forEach(function (item,i) {
+    calcTyp.change(function () {
+      if(calcTyp.val() == $(item).attr("name")) 
+      {
+        editInputStyle.call(styleObj0, item);
+      }
+      else if(calcTyp.val() == 1 && i == 4) 
+      {
+        item.addClass('dS').prop('disabled',true);
+      }
+      else if(calcTyp.val() == 2 && i == 3) 
+      {
+        item.addClass('dS').prop('disabled',true);
+        item.removeClass('ciSoR');
+      }
+      else if(calcTyp.val() == 3 && i == 3) 
+      {
+        item.addClass('dS').prop('disabled',true);
+        defBordC(item, '#66afe9', '#ccc');
+        item.removeClass('ciSoR');
+      }
+      else 
+      {
+        editInputStyle.call(styleObj1, item);
+        item.removeClass('dS');
+      }
+    });
+  });
 
-  function calcOnClick(id) {
+  var calclte = function(id) {
+    id.change(function () {
+      calc.calcDiff();
+    });
+  }
+
+  calclte(ic);
+  calclte(calcTyp);
+
+  let toggleElmStyle = function(id, focus, blur) {
+    $(id).focus(function () {
+      $(this).css('background-color', focus);
+    }).blur(function () {
+      $(this).css('background-color', blur);
+    });
+  }
+
+  inputList.forEach(function (item,i) {
+    if(i == 1) {
+      toggleElmStyle(item, '#B0C4DE', '#F0F0E7');
+    } 
+    else 
+    {
+      toggleElmStyle(item, '#E0FFFF', '#F0F0E7');
+      toggleElmStyle(selectList, '#FFFFFF', '#F0F0E7');
+    }
+  });
+
+  let _calc = function(id) {
     id.click(function () {
       calc.calcDiff();
     });
   }
 
-  calcOnClick($('#calc-btn'));
+  _calc($('#calc-btn'));
 
-  function resetOnClick(id, el, ct) {
-    id.click(function () {
-      el.forEach(function (item, index) {
-        item.val('');
-        if(index === 3) {
-          return editStyleSetup(item,'1px','#FF6347','#B0C4DE',true);
-        } else if(index === 0) {
-          return setup(item, '#E0FFFF','#F0F0E7');
-        } else if(index === 1) {
-          return setup(item, '#E0FFFF','#F0F0E7');
-        }
-      });
 
-      if(ct.val() === 'Compound Interest') {
-        return editStyleSetup(el[4],'1px','#FF6347','#F0F0E7',true);
-      } else {
-        return editStyleSetup(el[4],'1px','#ccc','#F0F0E7',false);
+  $('#btn-r').click(function () {
+    inputList.forEach(function (item, i) {
+      item.val('');
+      editInputStyle.call(styleObj1, item);
+      if(i == 3)
+      {
+        item.addClass('ciSoR').prop('disabled',true);
+      } 
+      else if(i == 1)
+      {
+        toggleElmStyle(item, '#E0FFFF', '#F0F0E7');
       }
-
+      else if(i == 4) 
+      {
+        item.addClass('dS').prop('disabled',true);
+      }
+      defBordC(item, '#66afe9', '#ccc');
     });
-  }
-
-  resetOnClick($('#rst-btn'), [p,r,t,ci,tAmt], calcTyp);
-
+  }); 
+  
   $('.fa-bars').click(function () {
-
-    let currentClass = $('.sub-nav nav');
-
-    if (currentClass.hasClass('not-active')) {
+    var currentClass = $('.sub-nav nav');
+    if (currentClass.hasClass('not-active')) 
+    {
       $(currentClass).removeClass('not-active').addClass('active');
-    } else {
+    } 
+    else 
+    {
       $(currentClass).removeClass('active').addClass('not-active');
     }
-
   });
 
   // Create the state-indicator element
-  var indicator = document.createElement('div');
+  let indicator = document.createElement('div');
   indicator.className = 'state-indicator';
   document.body.appendChild(indicator);
 
   // Create a method which returns device state
   function getDeviceState() {
-    var index = parseInt(window.getComputedStyle(indicator).getPropertyValue('z-index'), 10);
+    let index = parseInt(window.getComputedStyle(indicator).getPropertyValue('z-index'), 10);
 
-    var states = {
+    let states = {
       3: 'small-desktop',
       4: 'tablet',
       5: 'phone'
@@ -307,26 +328,17 @@ $("document").ready(function() {
     return states[index] || 'desktop';
   }
   
-  var state = getDeviceState();
-  var srchInput = $('.i-group');
-  if(srchInput.hasClass('col-xs-offset-2')) {
-    $(srchInput).removeClass('col-xs-offset-2').addClass('col-xs-offset-5');
-  } else if (state === 'phone' && srchInput.hasClass('col-xs-offset-5')) {
-    $(srchInput).removeClass('col-xs-offset-5').addClass('col-xs-offset-2');
-  }
-
   window.addEventListener('resize', function() {
     let state = getDeviceState();
-    if(state === 'desktop') {
+    if(state === 'desktop') 
+    {
       $('.navbar-top .nav-brand-wrapper').addClass('container');
       $('.navbar-top .sub-nav-wrapper').addClass('container');
-    } else if(state === 'small-desktop') {
+    } 
+    else if(state === 'small-desktop') 
+    {
       $('.navbar-top .nav-brand-wrapper').removeClass('container');
       $('.navbar-top .sub-nav-wrapper').removeClass('container');
-    } else if (state === 'phone') {
-      $(srchInput).removeClass('col-xs-offset-5').addClass('col-xs-offset-2');
-    } else if (state === 'tablet' && srchInput.hasClass('col-xs-offset-2')) {
-      $(srchInput).removeClass('col-xs-offset-2').addClass('col-xs-offset-5');
     }
   });
 
@@ -340,9 +352,8 @@ $("document").ready(function() {
   });
 
   function viewport() {
-    var e = window
-    , a = 'inner';
-    if ( !( 'innerWidth' in window ) ) {
+    var e = window, a = 'inner';
+    if (!('innerWidth' in window )) {
       a = 'client';
       e = document.documentElement || document.body;
     }
