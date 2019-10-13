@@ -55,10 +55,23 @@ p {
 }
 
 #totalAmt {
+	width: 60rem;
 	border-width: 1px;
 	border-color: #FF6347;
 }
 
+.dS {
+	border-width: 1px !important;
+	border-color: #FF6347 !important;
+}
+
+.ciSoR {
+   border-width: 1px !important;
+   border-width: #FF6347 !important;
+   border-color: #FF6347 !important;
+   background-color: #B0C4DE !important;
+}
+ 
 #enterAllFields {
 	color: red;
 }
@@ -98,7 +111,7 @@ p {
 }
 
 .btn-grp {
-    display: inline-block;
+    display: flex;
     margin-left: -15px;
 }
 
@@ -111,7 +124,7 @@ p {
 	margin-left: 0;
 }
 
-#rst-btn {
+#btn-r {
 	background-color: #696969;
 	border-radius: 9px;
 	color: white;
@@ -122,12 +135,12 @@ p {
 	margin-top: 5px;
 }
 
-#rst-btn:hover {
+#btn-r:hover {
 	background: #555;
 	color: #fff;
 }
 
-#rst-btn:active {
+#btn-r:active {
 	background: #333;
 }
 
@@ -170,11 +183,7 @@ p {
 	margin-top: 5px;
 }
 
-#totalAmt {
-	width: 60rem;
-}
-
-#cInterest {
+#cmpndInt {
 	width: 60rem;
 }
 
@@ -188,20 +197,19 @@ p {
 .nav-brand {
 	margin: 0;
 	padding: 0; 
-	display: flex;
+	display: block;
 }
 
 .navbar .logo {
+	width: 100%;
 	position: absolute;
     top: -7px;
-    background-size: cover;
-    background-attachment: fixed;
 }
 
 .i-group {
-	width: 38%;
 	position: absolute;
 	top: 9px;
+	left: -10px;
 }
 
 .i-group .fa-search {
@@ -399,16 +407,10 @@ p {
 }
 
 @media only screen and (max-width: 1200px) {
-	.navbar .logo {
-		position: absolute;
-		top: -7px;
-	}
-
 	.i-group {
-		width: 35%;
 		position: absolute;
 		top: 9px;
-		left: -12px;
+		left: -25px;
 	}
 }
 
@@ -420,23 +422,33 @@ p {
 	#years {width: 95%;}
 	#rate {width: 90%;}
 	#totalAmt {width: 100%;}
-	#cInterest {width: 100%;}
-	.navbar .logo {position: absolute;top: -7px;}
-	.i-group {width: 34%;position: absolute;top: 9px;left: -23px;}
+	#cmpndInt {width: 100%;}
+	.navbar .logo {width: 90%;left: -9px;}
+	.i-group {left:-33px;}
 	.state-indicator {z-index: 3;}
 }
 
+@media only screen and (max-width: 960px) {
+	.navbar .logo {margin-left: -7px;}
+}
+
 @media only screen and (max-width: 900px) {
-	.navbar .logo {position: absolute;top: -4px;}
+	.navbar .logo {top: -4px;}
 }
 
 @media only screen and (max-width: 800px) {
-	.navbar .logo {position: absolute;top: -3px;}
+	.navbar .logo {top: -3px;}
 }
 
 @media only screen and (max-width: 750px) {
 	.top-container {
 		margin-top: 100px;
+	}
+
+	.toggle-wrapper {
+		width: 100%;
+		padding: 0;
+		margin: 0;
 	}
 
 	.toggle-menu {
@@ -504,7 +516,7 @@ p {
 		border-top: 0;
 		border-bottom: 0;
 		width: 600px;
-		height: 550px;
+		height: 455px;
 		background: #f5f5f5;
 		width: 80%;
 		transition: 0.5s;
@@ -518,7 +530,7 @@ p {
 		border-top: 0;
 		border-bottom: 0;
 		width: 600px;
-		height: 550px;
+		height: 455px;
 		background: #f5f5f5;
 		width: 80%;
 		transition: 0.5s;
@@ -609,31 +621,19 @@ p {
 		background: none;
 	}
 
-	.i-group {
-		width: 32%;
-		position: absolute;
-		top: 9px;
-		left: -23px;
-	}
-
-	.navbar .logo {
-		position: absolute;
-		top: -2px;
-	}
-
 	.state-indicator {z-index: 4;}
 }
 
 @media only screen and (max-width: 700px) {
-	.navbar .logo {position: absolute;top: 0;}
+	.navbar .logo {top: 0;}
 }
 
 @media only screen and (max-width: 650px) {
-    .navbar .logo {position: absolute;top: 1px;}
+    .navbar .logo {top: 1px;}
 }
 
 @media only screen and (max-width: 650px) {
-    .navbar .logo {position: absolute;top: 2px;}
+    .navbar .logo {top: 2px;}
 }
 
 @media only screen and (max-width: 600px) {
@@ -646,17 +646,18 @@ p {
     }
 
     .navbar .logo {
-    	width: 75%;
-    	margin: 0;
-    	padding: 0;
-    	position: absolute;
     	top: -8px;
     }
 
+    .navbar-brand {
+    	width: 100%;
+    }
+
     .i-group {
-		width: 55%;
+		width: 60%;
 		position: absolute;
 		top: 57px;
+		margin-left: 70px;
 	}
 
 	.header {
@@ -698,46 +699,27 @@ p {
 
 @media only screen and (max-width: 400px) {
 	.navbar .logo {top: -2px;}
-	.i-group {
-		width: 50%;
-		position: absolute;
-		top: 57px;
-	}
 }
 
 @media only screen and (max-width: 350px) {
 	.navbar .logo {top: 2px;}
-	.i-group {
-		width: 45%;
-		position: absolute;
-		top: 57px;
-		left: -11px;
-	}
 }
 
 @media only screen and (max-width: 340px) {
-	#calc-btn {
-		font-size: 23px;
-	}
-
-	#rst-btn {
-		font-size: 17px;
-		margin-top: 2px;
-	}
-
 	.footer {
 		height: 200px;
+	}
+
+	.i-group {
+		width: 40%;
+		position: absolute;
+		top: 57px;
+		margin-left: 70px;
 	}
 }
 
 @media only screen and (max-width: 300px) {
 	.navbar .logo {top: 2px;}
-	.i-group {
-		width: 40%;
-		position: absolute;
-		top: 57px;
-	}
-
 	.title > h3 {
 		font-size: 15px;
 		font-weight: bold;
