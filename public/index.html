@@ -33,11 +33,11 @@
     <div class="container">
 		<nav class="navbar navbar-default navbar-top clearfix">
 			<div class="nav-brand-wrapper container">
-				<div class="col-md-12 col-sm-12 col-xs-12 pull-left nav-brand">
-					<div class="col-md-12 col-sm-5 col-xs-5 logo">
-						<a class="navbar-brand" href="#"><img class="img-responsive" src="./assets/logo.png"></a>
+				<div class="col-md-24 col-sm-24 col-xs-24 pull-left nav-brand">
+					<div class="logo">
+						<a class="col-lg-24 col-md-12 col-sm-11 col-xs-11 navbar-brand" href="#"><img class="img-responsive" src="./assets/logo.png"></a>
 					</div>
-					<div class="col-lg-4 col-lg-offset-4 col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5 col-xs-3 col-xs-offset-5 input-group i-group">
+					<div class="col-lg-9 col-lg-offset-8 col-md-8 col-md-offset-10 col-sm-8 col-sm-offset-10 col-xs-8 col-xs-offset-10 input-group i-group">
 						<input type="text" class="form-control" id="srch-term">
 						<div class="input-group-btn">
 							<button class="btn btn-default srch-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -89,7 +89,9 @@
 					</nav>
 				</div>
 			</div>
-			<div class="toggle-menu pull-left"><i class="fa fa-bars" aria-hidden="true"></i></div>
+            <div class="col-md-24 col-sm-24 col-xs-24 pull-left toggle-wrapper">
+             <div class="toggle-menu"><i class="fa fa-bars" aria-hidden="true"></i></div>
+         </div>
 		</nav>
     	<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 top-container">
     		<header class="header">
@@ -101,52 +103,54 @@
     		<div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 container sub-container clearfix">
     			<h4 id="title">Compound Interest Calculation - Annually, Semi-Anually, Quarterly etc...</h4>  
     			<div class="row top-row">
-    				<div class="col-lg-12 top-select">
+    				<div class="col-lg-24 top-select">
     					<p>I want to calculate</p>
     					<select class="form-control" id="calcTyp">
-    						<option value="Compound Interest">Compound Interest (CI)</option>
-    						<option value="Principal">Principal (P)</option>
-    						<option value="Rate">Rate of Interest (R)</option>
+    						<option value="1">Compound Interest (CI)</option>
+    						<option value="2">Principal (P)</option>
+    						<option value="3">Rate of Interest (R)</option>
     					</select>
     				</div>
 
-    				<div class="col-lg-12 pull-top sub-select">
+    				<div class="col-lg-24 pull-top sub-select">
     					<p>Interest Compounded</p>
-    					<select class="form-control" id="ic">
-    						<option value="Annually">Annually</option>
-    						<option value="Semi-Annually">Semi-Annually</option>
-    						<option value="Quarterly">Quarterly</option>
-    						<option value="Bi-Monthly">Bi-Monthly</option>
-    						<option value="Monthly">Monthly</option>
-    						<option value="Semi-Monthly">Semi-Monthly</option>
-    						<option value="Bi-Weekly">Bi-Weekly</option>
-    						<option value="Weekly">Weekly</option>
-    						<option value="Daily">Daily</option>
-    						<option value="Daily(365)">Daily(365)</option>
+    					<select class="form-control" id="intCmpnd">
+    						<option value="1">Annually</option>
+    						<option value="2">Semi-Annually</option>
+    						<option value="4">Quarterly</option>
+    						<option value="6">Bi-Monthly</option>
+    						<option value="12">Monthly</option>
+    						<option value="24">Semi-Monthly</option>
+    						<option value="36">Bi-Weekly</option>
+    						<option value="54">Weekly</option>
+    						<option value="360">Daily</option>
+    						<option value="365">Daily(365)</option>
     					</select>
     				</div>
 
-    				<div class="col-md-12 col-sm-12 col-xs-12 pull-top pull-left">
+    				<div class="col-md-24 col-sm-24 col-xs-24 pull-top pull-left">
     					<p>Principal or Sum [P]</p>
-    					<input class="form-control" id="sum" type="text" />
+    					<input name="2" class="form-control" id="sum" type="text" />
     				</div>
 
-    				<div class="col-md-12 col-sm-12 col-xs-12 pull-top pull-left">
+    				<div class="col-md-24 col-sm-24 col-xs-24 pull-top pull-left">
     					<p>Rate % per Annum [R]</p>
-    					<input class="form-control pull-left" id="rate" type="text" value="" />
+    					<input name="3" class="form-control pull-left" id="rate" type="text" value="" />
     					<span class="rate pull-right">%</span>
     				</div>
 
-    				<div class="col-md-12 col-sm-12 col-xs-12 pull-top pull-left">
+    				<div class="col-md-24 col-sm-24 col-xs-24 pull-top pull-left">
     					<p>Time Years [n]</p>
-    					<input class="form-control" id="years" type="text" maxlength="5" />
+    					<input name="4" class="form-control" id="years" type="text" maxlength="5" />
     				</div>
 
-    				<div class="col-md-12 col-sm-12 col-xs-12 pull-top btn-grp">
-    					<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+    				<div class="col-md-24 col-sm-24 col-xs-24 pull-top btn-grp">
+    					<div class="col-lg-20 col-md-20 col-sm-20 col-xs-20">
     						<button class="btn btn-danger btn-block" id="calc-btn">Calculate</button>
     					</div>
-    					<button class="btn btn-sm" id="rst-btn">Reset</button>
+                        <div>
+    					    <button class="btn btn-sm" id="btn-r">Reset</button>
+                        </div>
     				</div>
     				<div class="errorMsgs pull-left">
     					<span id="enterAllFields"></span>
@@ -156,13 +160,13 @@
 
     			<div class="container-fluid footer">
     				<div class="row fRow">
-    					<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 pull-top pull-left">
+    					<div class="col-lg-24 col-md-23 col-sm-23 col-xs-23 pull-top pull-left">
     						<p>Compound Interest [C.I.]</p>
-    						<input class="form-control" id="cInterest" type="text" />
+    						<input name="1" class="form-control" id="cmpndInt" type="text" />
     					</div>
-    					<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 pull-top pull-left">
+    					<div class="col-lg-24 col-md-23 col-sm-23 col-xs-23 pull-top pull-left">
     						<p>Total Amount</p>
-    						<input class="form-control" id="totalAmt" type="text" disabled />
+    						<input name="5" class="form-control" id="totalAmt" type="text" disabled />
     					</div>
     				</div>
     			</div>
