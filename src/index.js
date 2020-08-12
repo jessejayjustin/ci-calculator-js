@@ -128,23 +128,21 @@ var calc = {
 	    }
     }
 }
-
-	const p = $('#sum'); // Principal or Sum of amount
-	const r = $('#rate'); // % Rate per annum
-	const t = $('#years'); // Time Span in years
-	const ic = $('#intCmpnd'); // Interest Compounded
-	const ci = $('#cmpndInt'); // Compound Interest
-	const rErr = $('#rateErr');
-	const tAmt = $('#totalAmt');
+    
+    const p = $('.sum') // Sum or Principal
+	const r = $('.rate'); // % Rate per annum
+	const y = $('.year'); // Time Span in years
+	const ic = $('#intCom'); // Interest Compounded
+	const ci = $('#comInt'); // Compound Interest
+	const rErrMsg = $('.rErrMsg');
+	const tAmt = $('.total');
 	const calcTyp = $('#calcTyp'); // Calculation type
-	const helpId = $('#enterAllFields');
-	const _input = $('input[type="text"]');
-	const selectList = $('select[class="form-control"]');
-
-    calc.setCalcProperties(p, r, t, ic, ci, tAmt, rErr, calcTyp);
+	const helpId = $('.enterAllFields');
+    
+    calc.setCalcProperties(p, r, y, ic, ci, tAmt, rErrMsg, calcTyp);
     calc.calcDiff();
 
-    let validateList = function(id) {
+    function validateList(id) {
     	id.keyup(function (event) {
     		event = (event) ? event : window.event;
     		var charCode = (event.which) ? event.which : event.keyCode;
@@ -157,29 +155,24 @@ var calc = {
     	});
     }
 
-    let isListEmpty = function(id) {
-    	id.keyup(function (event) {
-    		calc.calcDiff();
-    		var val = $(this).val().replace(/[^\d.]/g, '');
-    		$(this).val(val);
-    		if(val === '') {
-    			helpId.html('Enter all the fields');
-    			if($('#rateErr:contains("Enter Rate of interest up to 100(%)")').length > 0) {
-    				helpId.html('');
-    			}
-    		} else {
-    			helpId.html('');
-    		}
-    	});
-    }
+	$('input[type="text"]').keyup(function (event) {
+		calc.calcDiff();
+		var val = $(this).val().replace(/[^\d.]/g, '');
+		$(this).val(val);
+		if(val === '') {
+			helpId.html('Enter all the fields');
+			if($('#rateErr:contains("Enter Rate of interest up to 100(%)")').length > 0) {
+				helpId.html('');
+			}
+		} else {
+			helpId.html('');
+		}
+	});
 
     validateList(p);
-    validateList(r);
-    isListEmpty(_input);
-
-    const inputList = [p,r,t,ci,tAmt];
-
-    let editInputStyle = function(el) {
+    validateList(y);
+    
+    function changeStyle(el) {
     	return el.css({
     		'border-width': this.bW,
     		'border-color': this.bordC,
@@ -201,53 +194,57 @@ var calc = {
     	dsbld: false
     }
 
-    let defBordC = function(id, bc0, bc1) {
+    function bC(id, bc0, bc1) {
     	$(id).focus(function () {
     		$(id).css('border-color', bc0);
     	}).blur(function () {
     		$(id).css('border-color', bc1);
     	});
     }
+    
+    var elems = document.querySelectorAll('input[type="text"]');
 
-    inputList.forEach(function (item,i) {
+    jQuery.each(elems, function(i, elem){
     	calcTyp.change(function () {
-    		if(calcTyp.val() == $(item).attr("name")) 
+	      	if(calcTyp.val() == $(elem).attr("name")) 
+	    	{
+	    		changeStyle.call(styleObj0, $(elem));
+	        }
+	        else if(calcTyp.val() == 1 && i == 4) 
     		{
-    			editInputStyle.call(styleObj0, item);
-    		}
-    		else if(calcTyp.val() == 1 && i == 4) 
-    		{
-    			item.addClass('dS').prop('disabled',true);
+    			$(elem).addClass('dS').prop('disabled',true);
     		}
     		else if(calcTyp.val() == 2 && i == 3) 
-    		{
-    			item.addClass('dS').prop('disabled',true);
-    			item.removeClass('ciSoR');
+    		{   
+    			changeStyle.call(styleObj1, $('input[name="1"]'));
+    			$(elem).addClass('dS').prop('disabled',true);
+    			$(elem).removeClass('ciSoR');
     		}
     		else if(calcTyp.val() == 3 && i == 3) 
     		{
-    			item.addClass('dS').prop('disabled',true);
-    			defBordC(item, '#66afe9', '#ccc');
-    			item.removeClass('ciSoR');
+    			changeStyle.call(styleObj1, $('input[name="1"]'));
+    			$(elem).addClass('dS').prop('disabled',true);
+    			bC($(elem), '#66afe9', '#ccc');
+    			$(elem).removeClass('ciSoR');
     		}
     		else 
     		{
-    			editInputStyle.call(styleObj1, item);
-    			item.removeClass('dS');
+    			changeStyle.call(styleObj1, $(elem));
+    			$(elem).removeClass('dS');
     		}
-    	});
+	    });
     });
 
-    var calclte = function(id) {
+    function calcu(id) {
     	id.change(function () {
     		calc.calcDiff();
     	});
     }
 
-    calclte(ic);
-    calclte(calcTyp);
+    calcu(ic);
+    calcu(calcTyp);
 
-    let toggleElmStyle = function(id, focus, blur) {
+    function toggStyle(id, focus, blur) {
     	$(id).focus(function () {
     		$(this).css('background-color', focus);
     	}).blur(function () {
@@ -255,58 +252,43 @@ var calc = {
     	});
     }
 
-    inputList.forEach(function (item,i) {
-    	if(i == 1) {
-    		toggleElmStyle(item, '#B0C4DE', '#F0F0E7');
+    jQuery.each(elems, function(i, elem){
+        if(i == 1) 
+        {
+    		toggStyle(elem, '#B0C4DE', '#F0F0E7');
     	} 
     	else 
     	{
-    		toggleElmStyle(item, '#E0FFFF', '#F0F0E7');
-    		toggleElmStyle(selectList, '#FFFFFF', '#F0F0E7');
+    		toggStyle(elem, '#E0FFFF', '#F0F0E7');
+    		toggStyle($('select[class="form-control"]'), '#FFFFFF', '#F0F0E7');
     	}
     });
 
-    let _calc = function(id) {
-    	id.click(function () {
-    		calc.calcDiff();
-    	});
-    }
-
-    _calc($('#calc-btn'));
-
-
-    $('#btn-r').click(function () {
-    	inputList.forEach(function (item, i) {
-    		item.val('');
-    		editInputStyle.call(styleObj1, item);
+    $('.calc-button').click(function () {
+    	calc.calcDiff();
+    });
+  
+    $('.reset').click(function () {
+    	jQuery.each(elems, function(i, elem) {
+    		$(elem).val('');
+    		changeStyle.call(styleObj1, $(elem));
     		if(i == 3)
     		{
-    			item.addClass('ciSoR').prop('disabled',true);
+    			$(elem).addClass('ciSoR').prop('disabled',true);
     		} 
     		else if(i == 1)
     		{
-    			toggleElmStyle(item, '#E0FFFF', '#F0F0E7');
+    			toggStyle($(elem), '#E0FFFF', '#F0F0E7');
     		}
     		else if(i == 4) 
     		{
-    			item.addClass('dS').prop('disabled',true);
+    			$(elem).addClass('dS').prop('disabled',true);
     		}
-    		defBordC(item, '#66afe9', '#ccc');
-    	});
+    		bC($(elem), '#66afe9', '#ccc');
+        });
     }); 
 
-    $('.fa-bars').click(function () {
-    	var currentClass = $('.sub-nav nav');
-    	if (currentClass.hasClass('not-active')) 
-    	{
-    		$(currentClass).removeClass('not-active').addClass('active');
-    	} 
-    	else 
-    	{
-    		$(currentClass).removeClass('active').addClass('not-active');
-    	}
-    });
-
+    /*
     // Create the state-indicator element
     let indicator = document.createElement('div');
     indicator.className = 'state-indicator';
@@ -327,19 +309,11 @@ var calc = {
 	  
 	window.addEventListener('resize', function() {
 	  	let state = getDeviceState();
-	  	if(state === 'desktop') 
-	  	{
-	  		$('.navbar-top .nav-brand-wrapper').addClass('container');
-	  		$('.navbar-top .sub-nav-wrapper').addClass('container');
-	  	} 
-	  	else if(state === 'small-desktop') 
-	  	{
-	  		$('.navbar-top .nav-brand-wrapper').removeClass('container');
-	  		$('.navbar-top .sub-nav-wrapper').removeClass('container');
-	  	}
+	  	if(state === 'desktop') {} 
+	  	else if(state === 'small-desktop') {}
 	});
 
-	/*
+	
 	$(window).scroll(function() {
 	    if ($(document).scrollTop() > 50) {
 	      $('nav').addClass('class_nav');
