@@ -117,6 +117,10 @@ p {font-size: 17px;color: #666;}
 
 #comInt {width: 60rem;}
 
+.btn.focus, .btn:focus, .btn:hover {
+	color: #fff;
+}
+
 .state-indicator {
 	position: absolute;
     top: -999em;
