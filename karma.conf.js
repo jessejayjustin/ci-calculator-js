@@ -18,11 +18,11 @@ module.exports = function(config) {
 
     files: [
       'node_modules/jquery/dist/jquery.min.js',
-      'src/index.js',
+      'src/main.js',
       'src/tests/Spec.js'],
 
     preprocessors: {  
-      'src/index.js': ['webpack'],
+      'src/main.js': ['webpack'],
       'src/tests/Spec.js': ['webpack']
     },
 
