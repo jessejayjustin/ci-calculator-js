@@ -6,8 +6,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
 	entry: [
-	  './src/index.js', 
-	  './node_modules/bootstrap/dist/css/bootstrap.min.css',
+	  './src/main.js', 
 	  './src/css/all.css'
 	],
 
