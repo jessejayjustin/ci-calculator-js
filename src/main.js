@@ -279,12 +279,12 @@ r.onclick = function() {
 		setStyle(el[4], {'borderColor':'#FF6347',
 	    'backgroundColor':'#F0F0E7'});
 		el[4].disabled = true;
-		if (helpId != null) {
+		if(helpId != null) {
 			while (helpId.childNodes[0]) {
 			    helpId.removeChild(helpId.childNodes[0]);
 			}
 		}
-		if (errMsg != null) {
+		if(errMsg != null) {
 		    while (errMsg.childNodes[0]) {
 	          errMsg.removeChild(errMsg.childNodes[0]);
 	        }
@@ -295,19 +295,19 @@ r.onclick = function() {
 c.onclick = function() {
     for(var i = 0; i < el.length; i++) {
 	    if(el[i].value == "") {
-		 	if (helpId != null) {
+		 	if(helpId != null) {
 			    while (helpId.childNodes[0]) {
 			       helpId.removeChild(helpId.childNodes[0]);
 			    }
 			}
-		    if (errMsg != null) {
+		    if(errMsg != null) {
 			    while (errMsg.childNodes[0]) {
 		           errMsg.removeChild(errMsg.childNodes[0]);
 		        }
 		    }
 		   	helpId.appendChild(document.createTextNode('Enter all the fields'));
 		} else {
-			if (helpId != null) {
+			if(helpId != null) {
 			    while (helpId.childNodes[0]) {
 			        helpId.removeChild(helpId.childNodes[0]);
 			    }
@@ -355,11 +355,11 @@ var none = document.createTextNode("");
 window.addEventListener('load', function() {
   	let state = getDeviceState();
   	if(state === 'desktop') {
-        if (!paragraph.childNodes[0]) {
+        if(!paragraph.childNodes[0]) {
 		    paragraph.appendChild(text);
         }
   	} else if(state === 'phone') {
-        if (!mobileParagraphText.childNodes[0]) {
+        if(!mobileParagraphText.childNodes[0]) {
 		    mobileParagraphText.appendChild(text);
         }
   	}
@@ -373,7 +373,7 @@ window.addEventListener('resize', function() {
   	} else if(state === 'phone') {
         paragraph.appendChild(none);
         mobileParagraphText.style.display = 'block';
-        if (!mobileParagraphText.childNodes[0]) {
+        if(!mobileParagraphText.childNodes[0]) {
 		    mobileParagraphText.appendChild(text);
         }
   	}
